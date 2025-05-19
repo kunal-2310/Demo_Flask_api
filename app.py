@@ -21,23 +21,25 @@ def process_prompt():
     print(f"Received Prompt: {actual_prompt}")
 
     # Define a prompt template
-    extract_fields = ChatPromptTemplate.from_messages([
-        ("system", "You are a good assistant, help me in extracting some data from the provided prompt."),
-        ("human", """I will provide you a prompt like 'Assign a high-priority AC maintenance task to Amit Patel. 
+extract_fields = ChatPromptTemplate.from_messages([
+    ("system", "You are a good assistant, help me in extracting some data from the provided prompt."),
+    ("human", """I will provide you a prompt like 'Assign a high-priority AC maintenance task to Amit Patel. 
 The site is a customer named Rajesh Sharma. Schedule it for tomorrow at 11 AM. Client’s phone number is 9876543210' 
 then you have to give me the response in JSON format like:
-{
+{{
     "name": "Amit Patel",
     "phoneNumber": "9876543210",
     "location": "Sector 21, Gurgaon",
     "task": "AC Maintenance",
     "priority": "High",
     "customerName": "Rajesh Sharma"
-}"""),
-        ("human", "\n\nDo not generate the output based on the above sample — it’s just for reference on format.\n"
-                  "Now the actual prompt is '{prompt}'. If any field data is missing, keep it blank.\n"
-                  "If no actual prompt is provided, keep the structure same with empty values, like 'name': '', etc.")
-    ])
+}}
+"""),
+    ("human", "\n\nDo not generate the output based on the above sample — it’s just for reference on format.\n"
+              "Now the actual prompt is '{prompt}'. If any field data is missing, keep it blank.\n"
+              "If no actual prompt is provided, keep the structure same with empty values, like 'name': '', etc.")
+])
+
 
     # Format the prompt
     messages = extract_fields.format_messages(prompt=actual_prompt)
