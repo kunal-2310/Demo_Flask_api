@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from langchain_openai import OpenAI  # ✅ migrated to langchain-openai
+from langchain_community.llms import OpenAI
 from langchain.prompts import ChatPromptTemplate
 import os
 import re
@@ -16,7 +16,7 @@ api_key = os.getenv("OPENAI_API_KEY")
 def process_prompt():
     data = request.get_json()
 
-    llm = OpenAI(api_key=api_key, model="gpt-4o")  # ✅ 'gpt-4o' (no 'mini' variant exists — GPT-4o is multi-modal)
+    llm = OpenAI(api_key=api_key, model="gpt-4o-mini")  # ✅ 'gpt-4o' (no 'mini' variant exists — GPT-4o is multi-modal)
     actual_prompt = data.get('prompt')
     print(f"Received Prompt: {actual_prompt}")
 
