@@ -42,7 +42,7 @@ then you have to give me the response in JSON format like:
 
 
     # Format the prompt
-    messages = extract_fields.format_messages(prompt=actual_prompt)
+    messages =extract_fields.format_messages(prompt=actual_prompt)
     final_prompt = "\n\n".join([f"{m.type.upper()}: {m.content}" for m in messages])
 
     # Call LLM
